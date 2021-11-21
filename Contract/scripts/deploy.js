@@ -1,25 +1,22 @@
-const main = async() =>{
-    const [deployer] = await hre.ethers.getSigners();
-    const accountBalance = await deployer.getBalance();
+const main = async () => {
+  const waveContractFactory = await hre.ethers.getContractFactory('WavePortal');
+  const waveContract = await waveContractFactory.deploy({
+    value: hre.ethers.utils.parseEther('1'),
+  });
 
-    console.log("Deploying account ", deployer.address);
-    console.log("Account Balance:", accountBalance.toString());
+  await waveContract.deployed();
 
-    const Token = await hre.ethers.getContractFactory('WavePortal');
-    const portal = await Token.deploy();
-    
-    console.log("WavePortal address:",portal.address);
+  console.log('WavePortal address: ', waveContract.address);
 };
 
 const runMain = async () => {
-    try {
-      await main();
-      process.exit(0);
-    } catch (error) {
-      console.error(error);
-      process.exit(1);
-    }
-  };
-  
-  runMain();
+  try {
+    await main();
+    process.exit(0);
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+};
 
+runMain();
