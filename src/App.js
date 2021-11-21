@@ -9,7 +9,7 @@ const App = () => {
 
   const [allWaves, setAllWaves] = useState([]);
 
-  const contractAddress ='0xBa8BA3dFe64D45d655E6fF6FD2847406ACe5AFD0';
+  const contractAddress ='0x00eDE1A78aaeAB2FB26eff271deADb50e8aFf77c';
   const contractABI = abi.abi;
 
   const getAllWaves = async () => {
@@ -25,7 +25,7 @@ const App = () => {
         let wavesCleaned = [];
         waves.forEach(wave => {
           wavesCleaned.push({
-            address: wave.waver,
+            address: wave.sender,
             timestamp: new Date(wave.timestamp * 1000),
             message: wave.message
           });
@@ -162,7 +162,7 @@ const App = () => {
         </div>
 
         
-        <div class="msg">
+        <div className="msg">
           <input class ="message" id='msg' type ="text" placeholder="Your message for Medha"/>
           <button className="waveButton" onClick={wave}>
             Wave
@@ -177,7 +177,7 @@ const App = () => {
 
         {allWaves.map((wave, index) => {
           return (
-            <div class ="msg-box" key={index} style={{ backgroundColor: "#EFEFEF", marginTop: "16px", padding: "8px" }}>
+            <div className ="msg-box" key={index} style={{ backgroundColor: "#EFEFEF", marginTop: "16px", padding: "8px" }}>
               <div>Address: {wave.address}</div>
               <div>Time: {wave.timestamp.toString()}</div>
               <div>Message: {wave.message}</div>
